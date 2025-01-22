@@ -39,7 +39,7 @@ class Add : CliktCommand() {
   }
 }
 
-class List : CliktCommand() {
+class ListCommand : CliktCommand() {
   fun help(): String = "List all tasks"
 
   val project by option("-p", help = "Filter by project")
@@ -102,4 +102,5 @@ class CliDo : CliktCommand() {
 val filepath = "todo.txt"
 val taskManager = TaskManager(filepath)
 
-fun main(args: Array<String>) = CliDo().subcommands(Add(), List(), Done(), Delete()).main(args)
+fun main(args: Array<String>) =
+        CliDo().subcommands(Add(), ListCommand(), Done(), Delete()).main(args)
