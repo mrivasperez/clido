@@ -1,7 +1,3 @@
-```markdown
-
-```
-
 # Clido: A Command-Line Todo List Manager
 
 Clido is a simple yet powerful command-line application for managing your todo list. It's built in Kotlin and uses the [Clikt](https://github.com/ajalt/clikt) library for parsing command-line arguments. Clido helps you keep track of your tasks, organize them by projects and contexts, set priorities, and mark them as complete, all from the comfort of your terminal.
