@@ -29,16 +29,15 @@ data class Task(
         index++
       }
 
-      // Check for completion date
+      // Check for completion date (even if invalid)
       var completionDate: LocalDate? = null
-      if (isCompleted) {
+      if (isCompleted && index < parts.size) {
         try {
           completionDate = LocalDate.parse(parts[index], DATE_FORMATTER)
           index++
         } catch (e: DateTimeParseException) {
-          // Handle invalid completion date
-          isCompleted = false
-          index = 0 // Reset index to reprocess from the beginning
+          // Move past the invalid date
+          index++
         }
       }
 
@@ -55,11 +54,13 @@ data class Task(
 
       // Check for creation date
       var creationDate: LocalDate? = null
-      try {
-        creationDate = LocalDate.parse(parts[index], DATE_FORMATTER)
-        index++
-      } catch (e: DateTimeParseException) {
-        // Handle invalid creation date
+      if (index < parts.size) {
+        try {
+          creationDate = LocalDate.parse(parts[index], DATE_FORMATTER)
+          index++
+        } catch (e: DateTimeParseException) {
+          // Handle invalid creation date
+        }
       }
 
       // Check for due date
