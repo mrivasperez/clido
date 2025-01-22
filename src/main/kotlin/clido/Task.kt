@@ -92,8 +92,46 @@ data class Task(
   }
 
   override fun toString(): String {
-    // TODO: Implement formatting logic to convert Task back to todo.txt line
-    // ... (We'll work on this after the parsing logic)
-    throw NotImplementedError("Task to String formatting not implemented yet")
+    val builder = StringBuilder()
+
+    // Completion Status
+    if (isCompleted) {
+      builder.append("x ")
+    }
+
+    // Completion Date (only if completed)
+    if (isCompleted && completionDate != null) {
+      builder.append(completionDate.format(DATE_FORMATTER)).append(" ")
+    }
+
+    // Priority
+    if (priority != null) {
+      builder.append("($priority) ")
+    }
+
+    // Creation Date
+    if (creationDate != null) {
+      builder.append(creationDate.format(DATE_FORMATTER)).append(" ")
+    }
+
+    // Description
+    builder.append(description)
+
+    // Projects
+    for (project in projects) {
+      builder.append(" +").append(project)
+    }
+
+    // Contexts
+    for (context in contexts) {
+      builder.append(" @").append(context)
+    }
+
+    // Due Date
+    if (dueDate != null) {
+      builder.append(" due:").append(dueDate.format(DATE_FORMATTER))
+    }
+
+    return builder.toString().trim() // Trim any trailing spaces
   }
 }
